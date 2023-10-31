@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\FileController;
+
 
 
 /*
@@ -21,4 +23,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('admin',[HomeController::class,'index'])->name('admin');
+Route::get('admin',[HomeController::class,'index'])->name('admin.home');
+route::resource('/admin/files',FileController::class)->names('admin.files');
+
