@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class FileController extends Controller
@@ -40,7 +41,19 @@ class FileController extends Controller
     public function store(Request $request)
     {
         //
-        return view('admin.files.store');
+        $request->validate([
+         'file'=>'required|image|max:2048'   
+        ]);
+        //imagen se guarda en public
+        $imagen= $request->file('file')->store('public/imagenes');
+        //coloca la ruta storage 
+        $url=Storage::url($imagen);
+        //guadar en el modelo
+        File::create([
+            'url'=>$url
+        ]);
+
+        return redirect()->route('admin.home');
     }
 
     /**
