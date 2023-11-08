@@ -50,6 +50,7 @@ class FileController extends Controller
         $url=Storage::url($imagen);
         //guadar en el modelo
         File::create([
+            'user_id'=>auth()->user()->id,
             'url'=>$url
         ]);
 
