@@ -7,7 +7,9 @@
     <div class="row">
         <div class="col">
             <h1>Subir Imagen</h1>
-           {{-- <div class="card mt-5">
+           
+           {{-- opcion 1 --}}
+            <div class="card mt-5">
                 <div class="card-body">
                     <form action="{{route('admin.files.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -22,10 +24,12 @@
                        
                     </form>
                 </div>
-            </div> --}}
+            </div> 
+            {{-- 
             <form action="{{route('admin.files.store')}}" method="POST" class="dropzone" id="my-great-dropzone">
             
             </form>
+            --}}
         </div>
     </div>
 </div>

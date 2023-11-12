@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 
 class FileController extends Controller
@@ -41,7 +43,8 @@ class FileController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
+       /* se comenta para activar la otra forma de guardar 
+       $request->validate([
          'file'=>'required|image|max:2048'   
         ]);
         //imagen se guarda en public
@@ -52,8 +55,24 @@ class FileController extends Controller
         File::create([
             'user_id'=>auth()->user()->id,
             'url'=>$url
-        ]);
+        ]);*/
+        /*   */
 
+        $request->validate([
+            'file'=>'required|image'   
+           ]);
+        $nombre= Str::random(10) . $request->file('file')->getClientOriginalName();
+        
+        $ruta=storage_path().'\app\public\imagenes/'.$nombre;
+        Image::make($request->file('file'))->resize(1200, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($ruta); 
+        //guardar en el modelo
+         //guadar en el modelo
+         File::create([
+            'user_id'=>auth()->user()->id,
+            'url'=>'/storage/imagenes/'.$nombre
+        ]);
         return redirect()->route('admin.home');
     }
 

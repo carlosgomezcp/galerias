@@ -22,6 +22,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+/*
+route::group(['prefix' => 'admin','namespace'=>'Admin','middelware'=>'auth'],function(){
+    Route::get('/',[HomeController::class,'index'])->name('admin.home');
+    //Route::get('/home',[HomeController::class,'index'])->name('admin.home');
+
+    route::resource('files',FileController::class)->names('admin.files');
+    
+
+});*/
 
 Route::get('admin',[HomeController::class,'index'])->name('admin.home');
 route::resource('/admin/files',FileController::class)->names('admin.files');
