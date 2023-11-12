@@ -8,7 +8,7 @@
         <div class="col">
             <h1>Subir Imagen</h1>
            
-           {{-- opcion 1 --}}
+           {{-- opcion 1 
             <div class="card mt-5">
                 <div class="card-body">
                     <form action="{{route('admin.files.store')}}" method="POST" enctype="multipart/form-data">
@@ -24,12 +24,12 @@
                        
                     </form>
                 </div>
-            </div> 
-            {{-- 
+            </div> --}}
+            {{--opcop 2 laraver intervetion --}}
             <form action="{{route('admin.files.store')}}" method="POST" class="dropzone" id="my-great-dropzone">
             
             </form>
-            --}}
+            
         </div>
     </div>
 </div>
@@ -58,7 +58,7 @@
     dictDefaultMessage:"Arraga la imgen al recuadro",
     acceptFiles:"imagen/*",
     maxFilesize:2,
-    maxFiles:4,
+    maxFiles:10,
   };
 </script>
 @endsection

@@ -20,7 +20,10 @@ class FileController extends Controller
     public function index()
     {
         //
-        return view('admin.files.index');
+        
+        $files=File::where('user_id',auth()->user()->id)->paginate(24);
+        
+        return view('admin.files.index',compact('files'));
     }
 
     /**
@@ -43,7 +46,7 @@ class FileController extends Controller
     public function store(Request $request)
     {
         //
-       /* se comenta para activar la otra forma de guardar 
+       // se comenta para activar la otra forma de guardar 
        $request->validate([
          'file'=>'required|image|max:2048'   
         ]);
@@ -55,9 +58,9 @@ class FileController extends Controller
         File::create([
             'user_id'=>auth()->user()->id,
             'url'=>$url
-        ]);*/
-        /*   */
-
+        ]);
+          
+        /*
         $request->validate([
             'file'=>'required|image'   
            ]);
@@ -72,7 +75,7 @@ class FileController extends Controller
          File::create([
             'user_id'=>auth()->user()->id,
             'url'=>'/storage/imagenes/'.$nombre
-        ]);
+        ]);*/
         return redirect()->route('admin.home');
     }
 
