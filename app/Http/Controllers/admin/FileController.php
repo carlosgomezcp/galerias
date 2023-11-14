@@ -121,8 +121,13 @@ class FileController extends Controller
      * @param  int  $file
      * @return \Illuminate\Http\Response
      */
-    public function destroy($file)
+    public function destroy(File $file)
     {
         //
+        $url=str_replace('storage','public',$file->url);
+        Storage::delete($url);
+        $file->delete();
+        return redirect()->route('admin.files.index')->with('i','ok');
+
     }
 }
